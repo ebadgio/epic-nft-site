@@ -3,12 +3,12 @@ import Head from 'next/head';
 
 import { Flex } from 'components/Flex';
 import { Button } from 'components/Button';
-import { H1, H3 } from 'components/Heading';
+import { H1 } from 'components/Heading';
 import { Text } from 'components/Text';
 
 const Home: NextPage = () => {
   return (
-    <Flex direction="column" align="center" css={{ paddingTop: "$6", textAlign: "center" }}>
+    <Flex direction="column" align="center" css={{ paddingTop: "$6", textAlign: "center", width: "100%" }}>
       <Head>
         <title>Epic NFT</title>
         <meta name="description" content="Mint an NFT" />

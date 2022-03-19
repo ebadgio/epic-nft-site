@@ -1,21 +1,11 @@
 import {
   gray,
   blue,
-  red,
-  green,
-  mint,
-  orange,
-  pink,
   violet,
   indigo,
   cyan,
   grayDark,
   blueDark,
-  redDark,
-  greenDark,
-  mintDark,
-  orangeDark,
-  pinkDark,
   violetDark,
   indigoDark,
   cyanDark,
@@ -63,21 +53,16 @@ const common = {
 
 export const { globalCss, styled, theme, createTheme } = createStitches({
   theme: {
+    ...common,
     colors: {
       white: '#fff',
       ...gray,
       ...blue,
-      ...red,
-      ...green,
-      ...mint,
-      ...orange,
-      ...pink,
       ...violet,
       ...indigo,
       ...cyan,
       blur: 'rgba(255,255,255,0.72)',
     },
-    ...common,
   },
   media: {
     bp1: '(max-width: 480px)',
@@ -89,18 +74,13 @@ export const { globalCss, styled, theme, createTheme } = createStitches({
 });
 
 export const darkTheme = createTheme({
+  ...common,
   colors: {
     ...grayDark,
     ...blueDark,
-    ...redDark,
-    ...greenDark,
-    ...mintDark,
-    ...orangeDark,
-    ...pinkDark,
     ...violetDark,
     ...indigoDark,
     ...cyanDark,
     blur: 'rgba(22,22,22,0.72)',
   },
-  ...common,
 })
