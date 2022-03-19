@@ -51,7 +51,7 @@ const common = {
   }
 }
 
-export const { globalCss, styled, theme, createTheme } = createStitches({
+export const { globalCss, styled, theme, createTheme, getCssText } = createStitches({
   theme: {
     ...common,
     colors: {
