@@ -16,16 +16,25 @@ export const Button = styled('button', {
   gap: '$2',
   
   variants: {
+    borderRadius: {
+      rounded: {
+        borderRadius: "$rounded",
+      },
+      roundedSquare: {
+        borderRadius: "$roundedSquare",
+      }
+    },
     color: {
       gray: {
         color: '$gray12',
       },
       rainbow: {
         color: '$gray12',
+        borderColor: '$gray1',
+        backgroundColor: '$white',
+        boxShadow: '-10px 0 15px -5px var(--colors-indigo7), 0 0 15px -5px var(--colors-blue7), 10px 0 15px -5px var(--colors-cyan7)',
         '&:hover': {
-          borderColor: '$gray1',
-          backgroundColor: '$gray1',
-          boxShadow: '-10px 0 15px -5px var(--colors-indigo7), 0 0 15px -5px var(--colors-blue7), 10px 0 15px -5px var(--colors-cyan7)',
+          boxShadow: '-10px 0 15px -5px var(--colors-indigo8), 0 0 15px -5px var(--colors-blue8), 10px 0 15px -5px var(--colors-cyan8)',
         }
       },
       ghost: {

@@ -64,6 +64,7 @@ const common = {
 export const { globalCss, styled, theme, createTheme } = createStitches({
   theme: {
     colors: {
+      white: '#fff',
       ...gray,
       ...blue,
       ...red,
