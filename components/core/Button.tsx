@@ -14,6 +14,16 @@ export const Button = styled('button', {
   paddingLeft: '$3',
   borderRadius: '$rounded',
   gap: '$2',
+  '&:disabled': {
+    boxShadow: 'none',
+    cursor: 'not-allowed',
+    background: '$gray1',
+    color: '$gray6',
+    '&:hover': {
+      boxShadow: 'none',
+      background: '$gray1',
+    }
+  },
   
   variants: {
     borderRadius: {
@@ -35,7 +45,7 @@ export const Button = styled('button', {
         boxShadow: '-10px 0 15px -5px var(--colors-indigo7), 0 0 15px -5px var(--colors-blue7), 10px 0 15px -5px var(--colors-cyan7)',
         '&:hover': {
           boxShadow: '-10px 0 15px -5px var(--colors-indigo8), 0 0 15px -5px var(--colors-blue8), 10px 0 15px -5px var(--colors-cyan8)',
-        }
+        },
       },
       ghost: {
         background: 'none',
