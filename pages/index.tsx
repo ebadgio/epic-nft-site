@@ -8,12 +8,13 @@ import { Box } from 'components/core/Box';
 import { Button } from 'components/core/Button';
 import { H1 } from 'components/core/Heading';
 import { Text } from 'components/core/Text';
+import { Mint } from 'components/Mint';
 
 const Home: NextPage = () => {
   const [{ data, error }, connect] = useConnect();
   const [{ data: accountData }, disconnect] = useAccount({
     fetchEns: true,
-  })
+  });
 
   const [metaMaskConnector, setMetaMaskConnector] = useState<Connector | null>(null);
 
@@ -21,8 +22,14 @@ const Home: NextPage = () => {
     setMetaMaskConnector(data.connectors[0]);
   }, [data]);
 
-  console.log(data, error, metaMaskConnector);
-  console.log(accountData);
+  useEffect(() => {
+    console.log(window.ethereum);
+  }, []);
+
+  // console.log('provider', provider);
+  //console.log(window && window.ethereum);
+  // console.log(data, error, metaMaskConnector);
+  // console.log(accountData);
 
   return (
     <Flex direction="column" align="center" css={{ paddingTop: "$6", textAlign: "center", width: "100%" }}>
@@ -46,12 +53,7 @@ const Home: NextPage = () => {
         >
           Connect MetaMask
         </Button> : 
-        <Button
-          color="rainbow" 
-          borderRadius="rounded"
-        >
-          Mint NFT
-        </Button>
+        <Mint />
       }
       {accountData && <Box css={{ marginTop: "$6"}}>
         {accountData.ens?.avatar && <img src={accountData.ens?.avatar} />}
