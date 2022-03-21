@@ -41,7 +41,7 @@ export const Button = styled('button', {
       rainbow: {
         color: '$gray12',
         borderColor: '$gray1',
-        backgroundColor: '$white',
+        backgroundColor: '$gray1',
         boxShadow: '-10px 0 15px -5px var(--colors-indigo7), 0 0 15px -5px var(--colors-blue7), 10px 0 15px -5px var(--colors-cyan7)',
         '&:hover': {
           boxShadow: '-10px 0 15px -5px var(--colors-indigo8), 0 0 15px -5px var(--colors-blue8), 10px 0 15px -5px var(--colors-cyan8)',

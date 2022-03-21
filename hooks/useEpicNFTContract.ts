@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useContract } from 'wagmi';
 import { BigNumber, ethers, Signer } from 'ethers';
-import axios from 'axios';
 
 import myEpicNFT from 'util/MyEpicNFT.json';
 
@@ -15,8 +14,6 @@ export function useEpicNFTContract() {
     contractInterface: myEpicNFT.abi,
     signerOrProvider: signer,
   })
-
-  console.log('contract', contract);
 
   useEffect(() => {
     if (window.ethereum) {
@@ -35,33 +32,4 @@ export type NFTData = {
     description: string;
     image: string;
   }
-}
-
-export function useMintedNfts(contract: any, accountAddress: string): Array<NFTData> {
-  const [nfts, setNfts] = useState<Array<NFTData>>([]);
-
-  useEffect(() => {
-    if (contract) {
-      try {
-        contract.on("NewEpicNFTMinted", async (from: string, tokenId: BigNumber) => {
-          console.log('NewEpicNFTMinted', from, tokenId.toNumber());
-          if (from === accountAddress) {
-            //setTokenIds([tokenId.toNumber(), ...tokenIds]);
-            const tokenUri = await contract.tokenURI(tokenId);
-            console.log('tokenUri', tokenUri);
-            const meta = await axios.get(tokenUri);
-            console.log('meta', meta.data);
-            setNfts([{
-              tokenId: tokenId.toNumber(),
-              metadata: meta.data
-            }, ...nfts]);
-          }
-        })
-      } catch (e) {
-        console.log('error setting up listener', e);
-      }
-    }
-  }, [contract]);
-
-  return nfts;
 }

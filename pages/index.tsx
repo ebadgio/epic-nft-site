@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useAccount, useConnect, Connector } from 'wagmi';
+
+import { darkTheme } from 'stitches.config';
 
 import { Flex } from 'components/core/Flex';
 import { Box } from 'components/core/Box';
@@ -9,8 +11,12 @@ import { Button } from 'components/core/Button';
 import { H1 } from 'components/core/Heading';
 import { Text } from 'components/core/Text';
 import { Mint } from 'components/Mint';
+import { Navbar } from 'components/Navbar';
+import { DarkModeContext } from 'context/DarkModeContext';
 
 const Home: NextPage = () => {
+  const [darkMode] = useContext(DarkModeContext);
+
   const [{ data, error }, connect] = useConnect();
   const [{ data: accountData }, disconnect] = useAccount({
     fetchEns: true,
@@ -26,18 +32,19 @@ const Home: NextPage = () => {
     console.log(window.ethereum);
   }, []);
 
-  // console.log('provider', provider);
-  //console.log(window && window.ethereum);
-  // console.log(data, error, metaMaskConnector);
-  // console.log(accountData);
-
   return (
-    <Flex direction="column" align="center" css={{ paddingTop: "$6", textAlign: "center", width: "100%" }}>
+    <Flex 
+      direction="column"
+      align="center"
+      className={darkMode ? darkTheme : ''}
+      css={{ padding: "$6 $3", textAlign: "center", width: "100%", minHeight: '100vh', background: '$gray1' }}
+    >
       <Head>
         <title>Epic NFT</title>
         <meta name="description" content="Mint an NFT" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Navbar account={accountData} />
       <H1 css={{ fontSize: "$xl"}}>
         Epic NFT Collection
       </H1>
@@ -51,19 +58,10 @@ const Home: NextPage = () => {
           disabled={!metaMaskConnector?.ready}
           onClick={() => metaMaskConnector && connect(metaMaskConnector)}
         >
-          Connect MetaMask
+          Connect MetaMask Wallet
         </Button> : 
         <Mint accountAddress={accountData.address} />
       }
-      {accountData && <Box css={{ marginTop: "$6"}}>
-        {accountData.ens?.avatar && <img src={accountData.ens?.avatar} />}
-        <Box css={{ fontWeight: "bold"}}>
-          {accountData.ens?.name
-            ? `${accountData.ens?.name} (${accountData.address})`
-            : accountData.address}
-        </Box>
-        <Box>Connected to {accountData.connector?.name}</Box>
-      </Box>}
     </Flex>
   )
 }

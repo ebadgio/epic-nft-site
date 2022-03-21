@@ -1,8 +1,11 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 
-import { Provider, chain, defaultChains } from 'wagmi';
+import { Provider, defaultChains } from 'wagmi';
 import { InjectedConnector } from 'wagmi/connectors/injected';
+
+import { DarkModeProvider } from 'context/DarkModeContext';
+import { MintedNFTsProvider } from 'context/MintedNFTsContext';
 
 const chains = defaultChains
 const connectors = ({ chainId }: { chainId?: number}) => {
@@ -16,9 +19,13 @@ const connectors = ({ chainId }: { chainId?: number}) => {
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Provider autoConnect connectors={connectors}>
-      <Component {...pageProps} />
-    </Provider>
+    <DarkModeProvider>
+      <MintedNFTsProvider>
+        <Provider autoConnect connectors={connectors}>
+          <Component {...pageProps} />
+        </Provider>
+      </MintedNFTsProvider>
+    </DarkModeProvider>
   )
 }
 
