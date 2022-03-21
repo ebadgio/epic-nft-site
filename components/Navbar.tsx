@@ -22,7 +22,7 @@ export const Navbar: React.FC<NavbarProps> = ({ account }) => {
   const [darkMode, setDarkMode] = useContext(DarkModeContext);
 
   return (
-    <Flex width="fill" justify="between" css={{ height: '50px', padding: '0 $3', position: 'absolute', top: 0}}>
+    <Flex width="fill" justify="between" css={{ height: '65px', padding: '0 $3', position: 'absolute', top: 0}}>
       <Flex css={{ gap: "$2"}}>
         {account?.ens?.avatar && <Avatar src={account?.ens?.avatar} />}
         <Box css={{ fontWeight: "bold"}}>
@@ -31,7 +31,10 @@ export const Navbar: React.FC<NavbarProps> = ({ account }) => {
             : account?.address}
         </Box>
       </Flex>
-      <Flex>
+      <Flex css={{ gap: "$3"}}>
+        <Button outlined as="a" target="_blank" href="https://testnets.opensea.io/collection/squarenft-rko4qhiyfy">
+          View Collection
+        </Button>
         <Button 
           color="ghost" 
           type="icon"

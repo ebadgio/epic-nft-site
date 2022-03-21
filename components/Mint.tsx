@@ -22,6 +22,31 @@ export const Mint: React.FC<MintProps> = ({ accountAddress }) => {
   const [minting, setMinting] = useState(false);
   const contract = useEpicNFTContract();
 
+  useEffect(() => {
+    if (contract) {
+      getNumberMinted();
+      getOwnedTokens();
+    }
+  }, [contract]);
+
+  const getNumberMinted = async () => {
+    if (contract.numberOfTokensMinted) {
+      const count = await contract.numberOfTokensMinted();
+      console.log('mint count', count);
+    } else {
+      console.log('missing method: numberOfTokensMinted')
+    }
+  }
+
+  const getOwnedTokens = async () => {
+    if (contract.tokensOfOwner) {
+      const tokens = await contract.tokensOfOwner(accountAddress);
+      console.log('tokens', tokens);
+    } else {
+      console.log('missing method: tokensOfOwner');
+    }
+  }
+
   const mintNFT = async () => {
     if (!window.ethereum) {
       alert('Ethereum not connected. Please connect your wallet.');
