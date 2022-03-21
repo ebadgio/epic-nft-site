@@ -2,11 +2,18 @@ import { useState } from 'react';
 
 import { Button } from 'components/core/Button';
 
-import { useEpicNFTContract } from 'hooks/useEpicNFTContract';
+import { useEpicNFTContract, useMintedNfts, CONTRACT_ADDRESS } from 'hooks/useEpicNFTContract';
+import { Flex } from './core/Flex';
+import { NFT } from './NFT';
 
-export const Mint: React.FC = () => {
+interface MintProps {
+  accountAddress: string;
+}
+
+export const Mint: React.FC<MintProps> = ({ accountAddress }) => {
   const [minting, setMinting] = useState(false);
   const contract = useEpicNFTContract();
+  const nfts = useMintedNfts(contract, accountAddress);
 
   const mintNFT = async () => {
     if (!window.ethereum) {
@@ -36,13 +43,16 @@ export const Mint: React.FC = () => {
   }
 
   return (
-    <Button
-      color="rainbow" 
-      borderRadius="rounded"
-      onClick={() => mintNFT()}
-      disabled={minting}
-    >
-      {minting ? "Minting..." : "Mint NFT"}
-    </Button>
+    <Flex direction="column" css={{ gap: "$2"}}>
+      <Button
+        color="rainbow" 
+        borderRadius="rounded"
+        onClick={() => mintNFT()}
+        disabled={minting}
+      >
+        {minting ? "Minting..." : "Mint NFT"}
+      </Button>
+      {nfts.map((nft) => <NFT key={nft.tokenId} data={nft} contractAddress={CONTRACT_ADDRESS} />)}
+    </Flex>
   )
 }

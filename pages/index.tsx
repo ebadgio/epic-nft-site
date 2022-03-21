@@ -53,7 +53,7 @@ const Home: NextPage = () => {
         >
           Connect MetaMask
         </Button> : 
-        <Mint />
+        <Mint accountAddress={accountData.address} />
       }
       {accountData && <Box css={{ marginTop: "$6"}}>
         {accountData.ens?.avatar && <img src={accountData.ens?.avatar} />}
