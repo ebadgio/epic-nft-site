@@ -4,7 +4,6 @@ import { SunIcon, MoonIcon } from '@radix-ui/react-icons';
 import { styled } from 'stitches.config';
 
 import { Avatar } from 'components/core/Avatar';
-import { Box } from 'components/core/Box';
 import { Button } from 'components/core/Button';
 import { Flex } from 'components/core/Flex';
 
@@ -77,7 +76,7 @@ export const Navbar: React.FC<NavbarProps> = ({ account }) => {
             outlined={!active}
             as="a" 
             target="_blank" 
-            href="https://testnets.opensea.io/collection/squarenft-duxgaleheg"
+            href="https://testnets.opensea.io/collection/epicnft-6no2hwfn4n"
           >
             View Collection
           </Button>

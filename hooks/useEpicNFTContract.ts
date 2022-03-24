@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useContract } from 'wagmi';
-import { BigNumber, ethers, Signer } from 'ethers';
+import { ethers } from 'ethers';
 
 import myEpicNFT from 'util/MyEpicNFT.json';
 
-export const CONTRACT_ADDRESS = "0xCB2090597b9fE9A5864E27Dd6fB33A635f48d8c5";
+export const CONTRACT_ADDRESS = "0x088EE2C010C2B87D8a19d5d4F6F8F8ef6ED0fa5C";
 
 export function useEpicNFTContract() {
   const [contract, setContract] = useState<any>();

@@ -32,7 +32,7 @@ export const NFT: React.FC<NFTProps> = ({ contractAddress, data }) => {
       <Text type="title">{data.metadata.name}</Text>
       <Flex width="fill" justify="between">
         <Text type="title">{`#${data.tokenId + 1}/${MAX_TOKENS}`}</Text>
-        <Box as="a" href={[BASE_OPENSEA_URL, contractAddress, data.tokenId].join('/')}>
+        <Box as="a" target="_blank" href={[BASE_OPENSEA_URL, contractAddress, data.tokenId].join('/')}>
           <Avatar 
             src="https://storage.googleapis.com/opensea-static/Logomark/Logomark-Blue.svg" 
           />

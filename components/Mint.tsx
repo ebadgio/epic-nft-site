@@ -23,7 +23,7 @@ interface MintProps {
 export const Mint: React.FC<MintProps> = ({ accountAddress }) => {
   const [nfts, setNfts] = useContext(MintedNFTsContext);
   const [minting, setMinting] = useState(false);
-  const [count, setCount] = useState<number>();
+  const [count, setCount] = useState<number>(-1);
   const contract = useEpicNFTContract();
 
   useEffect(() => {
@@ -138,7 +138,9 @@ export const Mint: React.FC<MintProps> = ({ accountAddress }) => {
       >
         {minting ? "Minting..." : "Mint NFT"}
       </Button>
-      {count && <Text>{count}/{MAX_TOKENS} NFTs minted so far.</Text>}
+      {count > -1 && <Text>
+        {count}/{MAX_TOKENS} NFTs minted so far.
+      </Text>}
       <Flex direction="column" align="start" width="fill" css={{maxWidth: "960px"}}>
         <H2>
           Your Epic NFTs

@@ -40,7 +40,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar account={accountData} />
-      <H1 css={{ fontSize: "$xl"}}>
+      <H1 css={{ fontSize: "$xl", marginBottom: "$2"}}>
         Epic NFT Collection
       </H1>
       <Text css={{ fontSize: "$h2", marginBottom: "$6"}}>
