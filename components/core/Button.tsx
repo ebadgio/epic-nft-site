@@ -37,6 +37,7 @@ export const Button = styled('button', {
     color: {
       gray: {
         color: '$gray12',
+        borderColor: '$gray12',
       },
       rainbow: {
         color: '$gray12',
@@ -67,10 +68,12 @@ export const Button = styled('button', {
     },
     outlined: {
       true: {
-        borderColor: '$gray5',
         borderStyle: 'solid',
-        borderWidth: '1px',
+        borderWidth: '2px',
         backgroundColor: 'transparent',
+        '&:hover': {
+          backgroundColor: '$gray5',
+        }
       }
     }
   }

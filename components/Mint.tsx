@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
-import { ethers } from 'ethers';
+import { BigNumber, ethers } from 'ethers';
 import axios from 'axios';
 
 import { Button } from 'components/core/Button';
@@ -13,6 +13,8 @@ import { MintedNFTsContext } from 'context/MintedNFTsContext';
 
 import myEpicNFT from 'util/MyEpicNFT.json';
 
+export const MAX_TOKENS = 1000;
+
 interface MintProps {
   accountAddress: string;
 }
@@ -20,6 +22,7 @@ interface MintProps {
 export const Mint: React.FC<MintProps> = ({ accountAddress }) => {
   const [nfts, addNFT] = useContext(MintedNFTsContext);
   const [minting, setMinting] = useState(false);
+  const [count, setCount] = useState<number>();
   const contract = useEpicNFTContract();
 
   useEffect(() => {
@@ -31,19 +34,26 @@ export const Mint: React.FC<MintProps> = ({ accountAddress }) => {
 
   const getNumberMinted = async () => {
     if (contract.numberOfTokensMinted) {
-      const count = await contract.numberOfTokensMinted();
-      console.log('mint count', count);
-    } else {
-      console.log('missing method: numberOfTokensMinted')
+      const count: BigNumber = await contract.numberOfTokensMinted();
+      setCount(count.toNumber());
     }
   }
 
   const getOwnedTokens = async () => {
     if (contract.tokensOfOwner) {
-      const tokens = await contract.tokensOfOwner(accountAddress);
-      console.log('tokens', tokens);
-    } else {
-      console.log('missing method: tokensOfOwner');
+      const tokenIds = await contract.tokensOfOwner(accountAddress);
+      for (const tokenId of tokenIds) {
+        try {
+          const tokenUri = await contract.tokenURI(tokenId);
+          const meta = await axios.get(tokenUri);
+          addNFT({
+            tokenId: tokenId.toNumber(),
+            metadata: meta.data
+          });
+        } catch (e) {
+          console.log(e);
+        }
+      }
     }
   }
 
@@ -84,22 +94,15 @@ export const Mint: React.FC<MintProps> = ({ accountAddress }) => {
         const connectedContract = new ethers.Contract(CONTRACT_ADDRESS, myEpicNFT.abi, signer);
 
         connectedContract.on("NewEpicNFTMinted", async (from, tokenId) => {
-          console.log(from, tokenId.toNumber())
           if (from === accountAddress) {
             const tokenUri = await connectedContract.tokenURI(tokenId);
             const meta = await axios.get(tokenUri);
-            console.log('nfts', nfts);
             addNFT({
               tokenId: tokenId.toNumber(),
               metadata: meta.data
             });
           }
         });
-
-        console.log("Setup event listener!")
-
-      } else {
-        console.log("Ethereum object doesn't exist!");
       }
     } catch (error) {
       console.log(error)
@@ -116,6 +119,7 @@ export const Mint: React.FC<MintProps> = ({ accountAddress }) => {
       >
         {minting ? "Minting..." : "Mint NFT"}
       </Button>
+      {count && <Text>{count}/{MAX_TOKENS} NFTs minted so far.</Text>}
       <Flex direction="column" align="start" width="fill" css={{maxWidth: "960px"}}>
         <H2>
           Your Epic NFTs

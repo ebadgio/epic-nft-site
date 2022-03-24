@@ -7,6 +7,7 @@ import { Image } from 'components/core/Image';
 
 import { NFTData } from 'hooks/useEpicNFTContract';
 import { Avatar } from './core/Avatar';
+import { MAX_TOKENS } from './Mint';
 
 const BASE_OPENSEA_URL = "https://testnets.opensea.io/assets";
 
@@ -28,12 +29,15 @@ export const NFT: React.FC<NFTProps> = ({ contractAddress, data }) => {
       }}
     >
       <Image src={data.metadata.image} />
-      <Text css={{ fontWeight: "bold" }}>{data.metadata.name}</Text>
-      <Box as="a" href={[BASE_OPENSEA_URL, contractAddress, data.tokenId].join('/')} css={{ alignSelf: "end"}}>
-        <Avatar 
-          src="https://storage.googleapis.com/opensea-static/Logomark/Logomark-Blue.svg" 
-        />
-      </Box>
+      <Text type="title">{data.metadata.name}</Text>
+      <Flex width="fill" justify="between">
+        <Text type="title">{`#${data.tokenId + 1}/${MAX_TOKENS}`}</Text>
+        <Box as="a" href={[BASE_OPENSEA_URL, contractAddress, data.tokenId].join('/')}>
+          <Avatar 
+            src="https://storage.googleapis.com/opensea-static/Logomark/Logomark-Blue.svg" 
+          />
+        </Box>
+      </Flex>
     </Flex>
   )
 }

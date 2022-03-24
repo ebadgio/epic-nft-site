@@ -6,7 +6,6 @@ import { useAccount, useConnect, Connector } from 'wagmi';
 import { darkTheme } from 'stitches.config';
 
 import { Flex } from 'components/core/Flex';
-import { Box } from 'components/core/Box';
 import { Button } from 'components/core/Button';
 import { H1 } from 'components/core/Heading';
 import { Text } from 'components/core/Text';

@@ -8,7 +8,16 @@ export const Text = styled('p', {
         fontSize: '$body',
         color: '$gray11',
       },
+      title: {
+        fontSize: '$body',
+        color: '$gray12',
+        fontWeight: "bold",
+      }
     }
   }
 });
+
+Text.defaultProps = {
+  type: "body",
+}
 
