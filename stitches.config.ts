@@ -61,7 +61,7 @@ export const { globalCss, styled, theme, createTheme, getCssText } = createStitc
       ...violet,
       ...indigo,
       ...cyan,
-      blur: 'rgba(255,255,255,0.72)',
+      blur: 'rgba(255,255,255,0.7)',
     },
   },
   media: {

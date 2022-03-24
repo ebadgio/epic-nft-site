@@ -27,10 +27,6 @@ const Home: NextPage = () => {
     setMetaMaskConnector(data.connectors[0]);
   }, [data]);
 
-  useEffect(() => {
-    console.log(window.ethereum);
-  }, []);
-
   return (
     <Flex 
       direction="column"
@@ -54,7 +50,6 @@ const Home: NextPage = () => {
         <Button 
           color="rainbow" 
           borderRadius="rounded"
-          disabled={!metaMaskConnector?.ready}
           onClick={() => metaMaskConnector && connect(metaMaskConnector)}
         >
           Connect MetaMask Wallet

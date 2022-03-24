@@ -7,14 +7,9 @@ import { InjectedConnector } from 'wagmi/connectors/injected';
 import { DarkModeProvider } from 'context/DarkModeContext';
 import { MintedNFTsProvider } from 'context/MintedNFTsContext';
 
-const RINKEBY_CHAIN_ID = 4;
-
 const chains = defaultChains;
 
 const connectors = ({ chainId }: { chainId?: number}) => {
-  if (chainId !== RINKEBY_CHAIN_ID) {
-    alert("You are not connected to the Rinkeby Test Network! To continue using this app please switch your network.");
-  }
   return [
     new InjectedConnector({
       chains,
